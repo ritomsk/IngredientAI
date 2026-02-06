@@ -379,10 +379,10 @@ const ResultsView = ({ results, onReset }) => {
             <motion.div variants={itemVars} className="flex justify-center pt-8">
                 <button
                     onClick={onReset}
-                    className="group flex items-center gap-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 px-6 py-3 rounded-full font-medium transition-all shadow-sm hover:shadow-md"
+                    className="group flex items-center gap-2 bg-slate-900 text-white px-8 py-3.5 rounded-full font-bold hover:bg-slate-800 transition-all hover:scale-105 shadow-lg"
                 >
-                    <RefreshCcw size={18} className="group-hover:-rotate-180 transition-transform duration-500" />
-                    Analyze Another Item
+                    <RefreshCcw className="w-4 h-4 group-hover:-rotate-180 transition-transform duration-500" />
+                    Analyze Another Product
                 </button>
             </motion.div>
         </motion.div>
