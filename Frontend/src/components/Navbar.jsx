@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import logoImage from '../assets/0B6E24C8-60A3-413F-B7F4-7F30949899DB.jpeg';
+import logoImage2 from '../assets/0882D437-77DF-4A58-8590-933A1A27D12B_4_5005_c.jpeg';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -26,7 +28,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-[100] border-b border-gray-100 shadow-sm transition-all duration-300 ${isScrolled
+            className={`fixed top-0 left-0 right-0 z-[100] border-b bg-white border-gray-100 shadow-sm transition-all duration-300 ${isScrolled
                 ? 'bg-white/90 backdrop-blur-md shadow-sm'
                 : 'bg-transparent'
                 }`}
@@ -34,8 +36,9 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
                 {/* 1. Logo: Changed to Link to prevent refresh */}
-                <Link to="/" className="text-2xl font-bold text-emerald-600 tracking-tight font-sans">
-                    Ingredient Co-Pilot
+                <Link to="/" className="text-2xl flex items-center font-bold text-emerald-600 tracking-tight font-sans">
+                    <img src={logoImage} alt="Logo" className="w-15 h-15" />
+                    <img src={logoImage2} alt="Logo" className="w-30 h-10 mb-2" />
                 </Link>
 
                 {/* 2. Desktop Navigation */}

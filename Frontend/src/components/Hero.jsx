@@ -5,17 +5,9 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
     return (
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 z-10">
-            {/* Badge */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="glass px-4 py-1.5 rounded-full flex items-center gap-2 text-sm font-medium text-emerald-800 bg-emerald-50/30 border-emerald-100/50 shadow-sm"
-            >
-                <Sparkles className="w-4 h-4" />
-                <span>AI-Powered Food Safety Analysis</span>
-            </motion.div>
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 z-10 mt-20">
+            <div className="absolute top-0 left-1/4 w-200 h-150 bg-emerald-100/50 rounded-full blur-3xl -z-100" />
+            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-50/50 rounded-full blur-3xl -z-100" />
 
             {/* Heading */}
             <motion.h1

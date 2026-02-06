@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 // 👇 THIS WAS MISSING. It fixes the crash.
 import { Heart, Users, ShieldCheck } from 'lucide-react';
+import heroImage2 from '../assets/035D8739-3088-431C-8018-E4068707CFEE.jpeg';
+import heroImage1 from '../assets/D75149C8-0774-4E7A-9338-5A595C2CE4F1.jpeg';
 
 const About = () => {
     // Animation Variants
@@ -16,7 +18,7 @@ const About = () => {
     };
 
     return (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden mt-10">
             {/* Background Decor (Matching Home) */}
 
 
@@ -31,7 +33,7 @@ const About = () => {
                     className="text-center mb-24 max-w-4xl mx-auto"
                 >
                     <h1 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-                        Our Mission is <span className="text-primary">Transparency.</span>
+                        Our Mission is <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">Transparency.</span>
                     </h1>
                     <p className="text-xl text-gray-500 leading-relaxed">
                         We believe everyone deserves to know exactly what they're putting into their bodies,
@@ -51,7 +53,7 @@ const About = () => {
                         {/* Image Container with Hover Zoom */}
                         <div className="relative h-[350px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl shadow-emerald-500/20">
                             <img
-                                src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&q=80&w=1000"
+                                src={heroImage1}
                                 alt="Healthy Ingredients"
                                 className="object-cover w-full h-full transition-transform duration-700 ease-in-out group-hover:scale-110"
                             />
@@ -66,9 +68,9 @@ const About = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6">Empowering Choices</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6">Smart Ingredient Insights</h2>
                         <p className="text-gray-500 leading-relaxed text-lg mb-6">
-                            Ingredient Co-Pilot decodes complex labels instantly. We highlight the good, flag the bad, and explain the "why" behind every ingredient.
+                            NutriAI decodes complex labels instantly. We highlight the good, flag the bad, and explain the "why" behind every ingredient.
                         </p>
                         <div className="h-1 w-20 bg-primary rounded-full" />
                     </motion.div>
@@ -86,7 +88,7 @@ const About = () => {
                         {/* Image Container with Hover Zoom */}
                         <div className="relative h-[350px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl shadow-emerald-500/20">
                             <img
-                                src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=1000"
+                                src={heroImage2}
                                 alt="Nutrition Analysis"
                                 className="object-cover w-full h-full transition-transform duration-700 ease-in-out group-hover:scale-110"
                             />
@@ -101,9 +103,9 @@ const About = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6">Science-Backed Analysis</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6">Smarter Food Decisions</h2>
                         <p className="text-gray-500 leading-relaxed text-lg mb-6">
-                            Our database is constantly updated with the latest nutritional science to provide accurate, unbiased assessments of food products.
+                            Powered by AI, we break down confusing food labels into clear, honest explanations — helping you make confident choices in seconds.
                         </p>
                         <div className="h-1 w-20 bg-primary rounded-full" />
                     </motion.div>

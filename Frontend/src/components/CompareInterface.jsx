@@ -76,7 +76,10 @@ const CompareInterface = () => {
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[80vh] px-4 py-8">
+
+        <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[80vh] px-4">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-100/50 rounded-full blur-3xl -z-10" />
+            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-50/50 rounded-full blur-3xl -z-10" />
             <AnimatePresence mode="wait">
 
                 {/* --- INPUT MODE --- */}
@@ -113,7 +116,7 @@ const CompareInterface = () => {
                                     value={userGoals}
                                     onChange={(e) => setUserGoals(e.target.value)}
                                     placeholder="e.g. High protein, Low sugar, or Weight loss..."
-                                    className="w-full h-20 bg-white/50 border border-border-glass rounded-xl p-4 text-base text-text-primary placeholder:text-text-muted/70 focus:ring-2 focus:ring-emerald-500/50 outline-none resize-none transition-all"
+                                    className="w-full h-20 bg-white/50 border border-border-glass focus-within:outline-none focus-within:ring-0 rounded-xl p-4 text-base text-text-primary placeholder:text-text-muted/70 focus:ring-0 outline-none resize-none transition-all"
                                 />
                             </div>
 

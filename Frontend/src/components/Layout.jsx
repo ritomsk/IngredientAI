@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
                 <Navbar />
             </div>
 
-            <main className="relative z-10 flex flex-col items-center min-h-[calc(100vh-80px)] px-4 sm:px-6 lg:px-8 mt-20">
+            <main className="relative z-10 flex flex-col items-center min-h-[calc(100vh-80px)] px-4 sm:px-6 lg:px-8 mt-10">
                 {children}
             </main>
 

@@ -11,8 +11,8 @@ import {
     RefreshCcw,
     ArrowRight,
     Info,
-    ShieldCheck,     // New icon for Safe
-    AlertOctagon     // New icon for Avoid
+    ShieldCheck,
+    AlertOctagon
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -115,46 +115,74 @@ const ResultsView = ({ results, onReset }) => {
         const greenIngredients = (results.green_flags || []).map(str => parsePoint(str, 'safe')).filter(Boolean);
         const redIngredients = (results.red_flags || []).map(str => parsePoint(str, 'avoid')).filter(Boolean);
 
+        // --- FIXED LOGIC START ---
         let calculatedStatus = 'caution';
         let verdictText = '';
         let isPositive = false;
         const rawVerdict = results.final_verdict;
 
-        if (Array.isArray(rawVerdict) && rawVerdict.length > 0) {
+        if (!rawVerdict) {
+            // Handle empty/null case
+            calculatedStatus = 'caution';
+            verdictText = "Analysis inconclusive";
+        }
+        // CASE 1: Object format { is_good: boolean, recommendation: string }
+        else if (typeof rawVerdict === 'object' && !Array.isArray(rawVerdict)) {
+            isPositive = Boolean(rawVerdict.is_good);
+            verdictText = rawVerdict.recommendation || "";
+        }
+        // CASE 2: Boolean
+        else if (typeof rawVerdict === 'boolean') {
+            isPositive = rawVerdict;
+            verdictText = rawVerdict ? "Safe to consume" : "Avoid";
+        }
+        // CASE 3: Array [boolean/string, string]
+        else if (Array.isArray(rawVerdict) && rawVerdict.length > 0) {
             const firstItem = rawVerdict[0];
-            if (typeof firstItem === 'object' && firstItem !== null && 'is_good' in firstItem) {
-                isPositive = firstItem.is_good;
+            verdictText = rawVerdict[1] || String(firstItem);
+
+            if (typeof firstItem === 'boolean') {
+                isPositive = firstItem;
+            } else if (typeof firstItem === 'object' && firstItem !== null && 'is_good' in firstItem) {
+                isPositive = Boolean(firstItem.is_good);
             } else {
-                isPositive = Boolean(firstItem);
+                isPositive = Boolean(firstItem); // Fallback
             }
-            verdictText = rawVerdict[1] || "";
-        } else if (typeof rawVerdict === 'string') {
+        }
+        // CASE 4: String
+        else if (typeof rawVerdict === 'string') {
             verdictText = rawVerdict;
             const lowerRaw = rawVerdict.toLowerCase();
-            isPositive = !(lowerRaw.includes('avoid') || lowerRaw.includes('limit') || lowerRaw.includes('no') || lowerRaw.includes('🔴'));
+            if (lowerRaw.includes('yes') || lowerRaw.includes('true') || lowerRaw.includes('safe') || lowerRaw.includes('excellent')) {
+                isPositive = true;
+            } else {
+                isPositive = !(lowerRaw.includes('avoid') || lowerRaw.includes('limit') || lowerRaw.includes('no'));
+            }
         }
 
-        const lowerText = verdictText.toLowerCase();
-        if (lowerText.includes('caution') || lowerText.includes('🟡') || lowerText.includes('warning')) {
-            calculatedStatus = 'caution';
-        } else if (lowerText.includes('avoid') || lowerText.includes('limit') || lowerText.includes('no ') || lowerText.includes('🔴')) {
-            calculatedStatus = 'avoid';
-        } else if (isPositive) {
+        // --- FINAL STATUS DETERMINATION ---
+        // If explicitly flagged as Good, force SAFE status.
+        if (isPositive) {
             calculatedStatus = 'safe';
         } else {
-            calculatedStatus = 'avoid';
+            // Otherwise, check keywords to distinguish between CAUTION and AVOID
+            const lowerText = verdictText.toLowerCase();
+            if (lowerText.includes('caution') || lowerText.includes('moderate') || lowerText.includes('warning')) {
+                calculatedStatus = 'caution';
+            } else {
+                calculatedStatus = 'avoid';
+            }
         }
+        // --- FIXED LOGIC END ---
 
         let alternativeText = null;
         let alternativeProduct = null;
         const rawAlt = results.better_alternative;
-        if (Array.isArray(rawAlt) && rawAlt.length > 0) {
-            alternativeText = rawAlt[0];
-            if (rawAlt.length > 1) {
-                alternativeProduct = rawAlt[1];
-            } else {
-                alternativeProduct = rawAlt[0];
-            }
+
+        // Handle array or string for better_alternative
+        if (Array.isArray(rawAlt)) {
+            if (rawAlt.length > 0) alternativeText = rawAlt[0];
+            if (rawAlt.length > 1) alternativeProduct = rawAlt[1];
         } else if (typeof rawAlt === 'string') {
             const cleaned = cleanText(rawAlt);
             if (cleaned) {
@@ -194,7 +222,7 @@ const ResultsView = ({ results, onReset }) => {
             text: "text-emerald-700",
             iconColor: "text-emerald-600",
             iconBg: "bg-emerald-100",
-            icon: ShieldCheck, // Changed to Shield
+            icon: ShieldCheck,
             label: "Excellent Choice"
         },
         caution: {
@@ -212,7 +240,7 @@ const ResultsView = ({ results, onReset }) => {
             text: "text-rose-700",
             iconColor: "text-rose-600",
             iconBg: "bg-rose-100",
-            icon: AlertOctagon, // Changed to Octagon
+            icon: AlertOctagon,
             label: "Avoid / Limit"
         },
     };
@@ -244,7 +272,7 @@ const ResultsView = ({ results, onReset }) => {
                     <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
 
                         <div className="flex-1 space-y-4">
-                            {/* UPDATED HEADER: Icon + Label in Single Line */}
+                            {/* Header: Icon + Label */}
                             <div className="flex items-center gap-4">
                                 <div className={cn("p-3 rounded-xl shrink-0", currentStyle.iconBg, currentStyle.iconColor)}>
                                     <currentStyle.icon className="w-8 h-8 md:w-9 md:h-9" strokeWidth={2.5} />
@@ -259,7 +287,7 @@ const ResultsView = ({ results, onReset }) => {
                             </p>
                         </div>
 
-                        {/* Confidence Meter (Centered Vertically) */}
+                        {/* Confidence Meter */}
                         <div className="flex-shrink-0 pt-6 md:pt-0 pl-0 md:pl-8 border-t md:border-t-0 md:border-l border-slate-100 md:border-transparent w-full md:w-auto flex justify-center">
                             <ConfidenceMeter score={data.confidence} />
                         </div>
@@ -268,7 +296,7 @@ const ResultsView = ({ results, onReset }) => {
             </motion.div>
 
             {/* 2. REALITY CHECK */}
-            {data.shockComparison && (
+            {data.shockComparison && (data.shockComparison.length > 0) && (
                 <motion.div variants={itemVars} className="bg-gradient-to-r from-rose-50 to-orange-50 rounded-2xl p-6 md:p-8 border border-rose-100 flex items-start gap-4 shadow-sm relative overflow-hidden">
                     <div className="bg-white p-3 rounded-full shadow-sm text-rose-500 hidden sm:block z-10">
                         <Zap size={24} fill="currentColor" className="opacity-20" />

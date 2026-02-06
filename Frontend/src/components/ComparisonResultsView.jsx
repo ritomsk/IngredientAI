@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti'; // Import the library
 import {
     Trophy,
     AlertOctagon,
@@ -22,13 +23,11 @@ const HealthScoreMeter = ({ score, colorClass }) => {
 
     const safeScore = Number(score) || 0;
 
-    // If score is 9/10, we want 90% fill.
     const strokeDashoffset = circumference - (safeScore / 10) * circumference;
 
     return (
         <div className="relative flex items-center justify-center w-20 h-20">
             <svg height="100%" width="100%" viewBox="0 0 100 100" className="-rotate-90">
-                {/* Background Circle */}
                 <circle
                     stroke="#e2e8f0"
                     strokeWidth={stroke}
@@ -37,7 +36,6 @@ const HealthScoreMeter = ({ score, colorClass }) => {
                     cx="50"
                     cy="50"
                 />
-                {/* Progress Circle */}
                 <motion.circle
                     stroke="currentColor"
                     strokeWidth={stroke}
@@ -48,8 +46,8 @@ const HealthScoreMeter = ({ score, colorClass }) => {
                     cy="50"
                     className={colorClass}
                     style={{ strokeDasharray: circumference }}
-                    initial={{ strokeDashoffset: circumference }} // Start empty
-                    animate={{ strokeDashoffset: strokeDashoffset }} // Animate to 9/10
+                    initial={{ strokeDashoffset: circumference }}
+                    animate={{ strokeDashoffset: strokeDashoffset }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
                 />
             </svg>
@@ -66,8 +64,45 @@ const ComparisonResultsView = ({ result, onReset }) => {
     const winnerName = winnerObj?.winner || "Unknown";
     const winnerReason = result?.final_recommendation?.[1] || "Analysis complete.";
 
-    // 2. Determine Theme based on Winner
-    // FORCE EMERALD (GREEN) THEME IF A OR B WINS
+    // 2. Confetti Effect Hook
+    useEffect(() => {
+        // Only trigger if there is a clear winner (A or B)
+        if (winnerName === "Product A" || winnerName === "Product B") {
+            const duration = 1500; // Animation lasts 3 seconds
+            const end = Date.now() + duration;
+
+            // Brand colors: Emerald, Blue, and a touch of Gold
+            const colors = ['#10b981', '#3b82f6', '#fbbf24', '#34d399', '#f5590b'];
+
+            (function frame() {
+                // Launch particles from the top left
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 70,
+                    origin: { x: 0, y: 0 }, // Top Left corner
+                    colors: colors,
+                    zIndex: 100 // Ensure it sits on top of UI
+                });
+
+                // Launch particles from the top right
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 70,
+                    origin: { x: 1, y: 0 }, // Top Right corner
+                    colors: colors,
+                    zIndex: 100
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    }, [winnerName]); // Re-run if the winner changes
+
+    // 3. Determine Theme based on Winner
     let theme = {
         bg: "bg-slate-50",
         border: "border-slate-200",
@@ -76,7 +111,7 @@ const ComparisonResultsView = ({ result, onReset }) => {
     };
 
     if (winnerName === "Product A" || winnerName === "Product B") {
-        theme = { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-700", icon: Trophy };
+        theme = { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-white", icon: Trophy };
     } else if (winnerName === "Neither") {
         theme = { bg: "bg-red-50", border: "border-red-200", text: "text-red-700", icon: AlertOctagon };
     }
@@ -91,7 +126,6 @@ const ComparisonResultsView = ({ result, onReset }) => {
         show: { opacity: 1, y: 0 }
     };
 
-    // Helper to safely render strings
     const safeText = (text) => typeof text === 'string' ? text : "";
 
     return (
@@ -104,8 +138,8 @@ const ComparisonResultsView = ({ result, onReset }) => {
             {/* --- HEADER: BATTLE SUMMARY --- */}
             <motion.div variants={itemVars} className={cn("rounded-3xl p-8 border text-center relative overflow-hidden", theme.bg, theme.border)}>
                 <div className="relative z-10 max-w-3xl mx-auto space-y-4">
-                    <div className={cn("inline-flex items-center gap-2 px-10 py-2.5 rounded-full bg-emerald-400/80 backdrop-blur-sm border border-black/5 text-lg  font-bold uppercase tracking-wider", theme.text)}>
-                        <theme.icon className="w-4 h-4" />
+                    <div className={cn("inline-flex items-center shadow-lg shadow-emerald-400/70 gap-2 px-10 py-2.5 rounded-full bg-emerald-400/100 backdrop-blur-sm border border-black/5 text-lg font-bold uppercase tracking-wide", theme.text)}>
+                        <theme.icon className="w-4 h-4 text-white" />
                         Winner: {winnerName === "Neither" ? "No Safe Choice" : winnerName === "Tie" ? "It's a Draw" : `${winnerName}`}
                     </div>
 
@@ -194,8 +228,6 @@ const ComparisonResultsView = ({ result, onReset }) => {
 const ProductCard = ({ data, label, isWinner, color }) => {
     if (!data) return null;
 
-    // Logic: If Winner -> Force Green (Emerald). If Loser -> Red.
-
     let borderClass = "border-slate-100";
     let shadowClass = "shadow-sm hover:shadow-md";
     let badgeBg = "bg-emerald-500";
@@ -203,17 +235,15 @@ const ProductCard = ({ data, label, isWinner, color }) => {
     let checkIconColor = "text-emerald-700";
 
     if (isWinner) {
-        // WINNER = ALWAYS GREEN (Subtle)
         borderClass = "border-emerald-500 ring-4 ring-emerald-500/10";
         badgeBg = "bg-emerald-500";
         scoreColor = "text-emerald-600";
         checkIconColor = "text-emerald-700";
     } else {
-        // LOSER = RED (Subtle Red Shadow)
         borderClass = "border-red-200";
         shadowClass = "shadow-red-100 hover:shadow-red-200 shadow-lg";
         scoreColor = "text-red-500";
-        checkIconColor = "text-emerald-700"; // Keep 'The Good' list green or neutral
+        checkIconColor = "text-emerald-700";
     }
 
     return (
@@ -232,7 +262,6 @@ const ProductCard = ({ data, label, isWinner, color }) => {
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{label}</span>
                     <h3 className="text-lg font-bold text-slate-900 mt-1 mb-2">"{data.vibe_check || 'Analysis'}"</h3>
                 </div>
-                {/* Score Meter with dynamic color */}
                 <HealthScoreMeter score={data.health_score} colorClass={scoreColor} />
             </div>
 

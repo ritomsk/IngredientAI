@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Github, Info } from 'lucide-react';
+import logoImage2 from '../assets/0882D437-77DF-4A58-8590-933A1A27D12B_4_5005_c.jpeg';
 
 const Footer = () => {
     const location = useLocation();
@@ -33,7 +34,7 @@ const Footer = () => {
                     {/* Left Side: Brand */}
                     <div>
                         <div className="flex items-center gap-2 mb-4">
-                            <h3 className="text-2xl font-bold text-emerald-600 font-sans">Ingredient Co-Pilot</h3>
+                            <img src={logoImage2} alt="NutriAI Logo" className="h-10 w-auto" />
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed">
                             Understanding food, one ingredient at a time.
@@ -111,8 +112,8 @@ const Footer = () => {
 
                 {/* Bottom Section */}
                 <div className="border-t border-gray-200 pt-8 flex flex-col items-center text-center text-sm text-gray-500">
-                    <p className="mb-2">© 2026 Ingredient Co-Pilot. All rights reserved.</p>
-                    <Link to="/terms" className="hover:text-emerald-600 transition-colors">
+                    <p className="mb-2">© 2026 NutriAI. All rights reserved.</p>
+                    <Link to="/" className="hover:text-emerald-600 transition-colors">
                         Terms of Service
                     </Link>
                 </div>
