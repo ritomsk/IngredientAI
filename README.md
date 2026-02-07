@@ -1,4 +1,4 @@
-# 🍎 NutriAI - Intelligent Food Ingredient Analysis
+# NutriAI - Intelligent Food Ingredient Analysis
 
 > Your AI-powered nutrition copilot that analyzes food ingredients and helps you make healthier choices
 
@@ -10,22 +10,22 @@
 [![Google AI](https://img.shields.io/badge/Google_AI-Gemini_2.5-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1.18-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-## 📋 Overview
+## Overview
 
 **NutriAI** is a comprehensive full-stack application that leverages Google's Gemini AI to provide intelligent food ingredient analysis. The application helps users make informed dietary decisions by analyzing food labels, scanning barcodes, and comparing products based on personalized health goals.
 
-### 🎯 Key Features
+### Key Features
 
-- **📸 Image Analysis**: Upload food label images to get instant AI-powered nutritional analysis
-- **📱 Barcode Scanner**: Scan product barcodes to retrieve detailed ingredient and nutrition information
-- **⚖️ Product Comparison**: Compare two products side-by-side to find the healthier option
-- **🎨 Beautiful UI**: Modern, responsive design with smooth animations using Framer Motion
-- **🎯 Personalized Insights**: Tailored recommendations based on user goals and dietary restrictions
-- **💡 Smart Recommendations**: Get green flags, red flags, and actionable pro tips for every product
+- ** Image Analysis**: Upload food label images to get instant AI-powered nutritional analysis
+- ** Barcode Scanner**: Scan product barcodes to retrieve detailed ingredient and nutrition information
+- ** Product Comparison**: Compare two products side-by-side to find the healthier option
+- ** Beautiful UI**: Modern, responsive design with smooth animations using Framer Motion
+- ** Personalized Insights**: Tailored recommendations based on user goals and dietary restrictions
+- ** Smart Recommendations**: Get green flags, red flags, and actionable pro tips for every product
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 FoodAI/
@@ -65,7 +65,7 @@ FoodAI/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -131,7 +131,7 @@ The application will be available at `http://localhost:5173`
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### 1. **POST** `/api/analyze`
 
@@ -223,7 +223,7 @@ Compare two food products side-by-side.
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend
 - **React 19.2.0** - UI library
@@ -245,7 +245,7 @@ Compare two food products side-by-side.
 
 ---
 
-## 🎨 Features Deep Dive
+## Features Deep Dive
 
 ### 1. **Image Analysis**
 Upload any food product label image, and the AI will:
@@ -280,7 +280,7 @@ The AI uses the "80/20 Rule" approach:
 
 ---
 
-## 📱 Pages & Routes
+## Pages & Routes
 
 - **`/`** - Home page with hero section and features overview
 - **`/chat`** - Main chat interface for image analysis and barcode scanning
@@ -289,7 +289,7 @@ The AI uses the "80/20 Rule" approach:
 
 ---
 
-## 🎯 User Goals & Personalization
+## User Goals & Personalization
 
 The application supports personalized analysis based on:
 - **Health Goals**: Weight loss, muscle gain, general wellness
@@ -301,7 +301,7 @@ Users can specify their goals when analyzing products, and the AI will tailor re
 
 ---
 
-## 🔒 Environment Variables
+## Environment Variables
 
 ### Backend (`.env`)
 ```env
@@ -316,7 +316,7 @@ VITE_API_URL=http://localhost:3001
 
 ---
 
-## 📝 Development Scripts
+## Development Scripts
 
 ### Backend
 ```bash
@@ -333,7 +333,7 @@ npm run lint       # Run ESLint
 
 ---
 
-## 🌟 Key Highlights
+## Key Highlights
 
 - **AI-Powered**: Leverages Google's latest Gemini 2.5 Flash model
 - **Real-time Analysis**: Get instant feedback on food products
@@ -344,25 +344,25 @@ npm run lint       # Run ESLint
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
-## 📄 License
+## License
 
 ISC License
 
 ---
 
-## 👤 Author
+## Author
 
 Developed with ❤️ by the NutriAI team
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Google Gemini AI** for powerful AI capabilities
 - **OpenFoodFacts** for barcode product data
@@ -372,5 +372,5 @@ Developed with ❤️ by the NutriAI team
 ---
 
 <div align="center">
-  <strong>Make healthier choices with AI-powered insights! 🥗✨</strong>
+  <strong>Make healthier choices with AI-powered insights! </strong>
 </div>
