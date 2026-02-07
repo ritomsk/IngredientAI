@@ -2,9 +2,7 @@
 
 > Your AI-powered nutrition copilot that analyzes food ingredients and helps you make healthier choices
 
-[![Live Demo]]([https://your-vercel-link.vercel.app](https://nutriai-black.vercel.app/))
-
-... (rest of your description)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)]([https://your-vercel-link.vercel.app](https://nutriai-black.vercel.app/))
 
 [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react&logoColor=white)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.2.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
