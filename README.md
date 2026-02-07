@@ -16,12 +16,12 @@
 
 ### Key Features
 
-- ** Image Analysis**: Upload food label images to get instant AI-powered nutritional analysis
-- ** Barcode Scanner**: Scan product barcodes to retrieve detailed ingredient and nutrition information
-- ** Product Comparison**: Compare two products side-by-side to find the healthier option
-- ** Beautiful UI**: Modern, responsive design with smooth animations using Framer Motion
-- ** Personalized Insights**: Tailored recommendations based on user goals and dietary restrictions
-- ** Smart Recommendations**: Get green flags, red flags, and actionable pro tips for every product
+- **Image Analysis**: Upload food label images to get instant AI-powered nutritional analysis
+- **Barcode Scanner**: Scan product barcodes to retrieve detailed ingredient and nutrition information
+- **Product Comparison**: Compare two products side-by-side to find the healthier option
+- **Beautiful UI**: Modern, responsive design with smooth animations using Framer Motion
+- **Personalized Insights**: Tailored recommendations based on user goals and dietary restrictions
+- **Smart Recommendations**: Get green flags, red flags, and actionable pro tips for every product
 
 ---
 
