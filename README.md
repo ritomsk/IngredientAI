@@ -12,7 +12,7 @@
 
 ## 📋 Overview
 
-**FoodAI** (also known as **IngredientAI**) is a comprehensive full-stack application that leverages Google's Gemini AI to provide intelligent food ingredient analysis. The application helps users make informed dietary decisions by analyzing food labels, scanning barcodes, and comparing products based on personalized health goals.
+**NutriAI** (also known as **IngredientAI**) is a comprehensive full-stack application that leverages Google's Gemini AI to provide intelligent food ingredient analysis. The application helps users make informed dietary decisions by analyzing food labels, scanning barcodes, and comparing products based on personalized health goals.
 
 ### 🎯 Key Features
 
